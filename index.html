@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For You</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:white;
+color:#333;
+text-align:center;
+overflow:hidden;
+}
+
+/* screens */
+
+.screen{
+display:none;
+height:100vh;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+}
+
+.active{
+display:flex;
+}
+
+/* buttons */
+
+button{
+padding:12px 25px;
+margin:10px;
+border:none;
+border-radius:30px;
+background:#ff4da6;
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+/* floating hearts */
+
+.float{
+position:absolute;
+bottom:-40px;
+font-size:22px;
+animation:floatUp 8s linear infinite;
+opacity:0.8;
+}
+
+@keyframes floatUp{
+0%{transform:translateY(0)}
+100%{transform:translateY(-120vh);opacity:0}
+}
+
+/* crumble pieces */
+
+.piece{
+position:absolute;
+width:30px;
+height:30px;
+background-size:300px 300px;
+animation:fall 2s forwards;
+}
+
+@keyframes fall{
+0%{
+transform:translateY(0) rotate(0deg);
+opacity:1;
+}
+100%{
+transform:translateY(200px) rotate(360deg);
+opacity:0;
+}
+}
+
+/* ashes */
+
+.ash{
+position:absolute;
+width:4px;
+height:4px;
+background:#333;
+border-radius:50%;
+animation:ashFall 2.5s forwards;
+}
+
+@keyframes ashFall{
+0%{transform:translateY(0);opacity:1}
+100%{transform:translateY(160px);opacity:0}
+}
+
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+<source src="descolado.mp3">
+</audio>
+
+<!-- SCREEN 1 -->
+
+<div class="screen active" id="s1">
+
+<img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdWdrZ2h1OW05d2JzemFmcTY0ZDNramxkYXM2Nzc3bjc4YXRoZHoxMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/vIIbrC80HHN7O/giphy.gif" width="520">
+
+<h2>Do you wanna see what I made?</h2>
+
+<button onclick="yes()">Yes</button>
+<button onclick="go('s2')">No</button>
+
+</div>
+
+
+<!-- SCREEN 2 -->
+
+<div class="screen" id="s2">
+
+<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExejRiM3RycmdqOGlnbWlvbHJiejJlcDlqaTlvdW54ZWM3N2djZHV4dyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/RCbXWg6QzBFCw/giphy.gif" width="520">
+
+<h2>How dare you 😤</h2>
+
+<button onclick="go('s1')">Retry</button>
+
+</div>
+
+
+<!-- SCREEN 3 -->
+
+<div class="screen" id="s3">
+
+<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbHUycWZseXJrc2FxNm1wdnlzN3R0aTlpNXg5MmdsOTZxenpxaTRkOCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/sb08e2jEdp3J2xMgus/giphy.gif" width="420">
+
+<h2>Have a look at it</h2>
+
+<button onclick="go('s4')">Lets Goo</button>
+
+</div>
+
+
+<!-- SCREEN 4 -->
+
+<div class="screen" id="s4">
+
+<h2>Look at this bullshit</h2>
+
+<img id="burnPic" src="pic.jpeg" width="460">
+
+<button onclick="burn()">Fuck This Shittt</button>
+
+</div>
+
+
+<!-- SCREEN 5 -->
+
+<div class="screen" id="s5">
+
+<h1>Okayy So My Dear Mikasaa listenn </h1>
+<p>I know sometimes it feels like no one really cares or notices you.  
+But that isn’t true.
+You matter more than you probably realize.  
+Your presence, your voice, your smile they make a difference.Even on days when things feel heavy, please remember this:  
+there are people who care about you, who appreciate you, and who are glad you exist.
+and guess wut you've changed me the way opening a window changes the dark room.See you think you don't deserve happiness
+but you do , you make me happy you make other happy soo you also deserves to be happy.See i've said this but iam gonna say anyways
+that im gonna remember you forever and you're def gonna be in my 7 mins thing hehe iam gonna remember every detail from small convo to 
+big details like your bday(15 sept ikrrrr) and who knows maybe you'll be here to share good happy moments with your eren hehehe 👉🏻👈🏻🤭. 
+and Even on days when you feel invisible or unimportant,
+please know that the world is softer because you are in it👉🏻👈🏻💗.
+You are not a burden, not a mistake, not someone meant to feel alone.
+You are someone who deserves bright mornings, peaceful nights,
+and a life filled with people who see your heart and treasure it(likee me hehehe) so dont you dare sayy that again😤 and feel free 
+to come to your eren sorry ereh😆 when world feels heavy or your heart feels heavy😋
+
+</div>
+
+
+<script>
+
+/* navigation */
+
+function go(id){
+document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+}
+
+/* yes button */
+
+function yes(){
+document.getElementById("music").play();
+go("s3");
+}
+
+/* start music on first tap anywhere */
+
+document.body.addEventListener("touchstart", () => {
+  const music = document.getElementById("music");
+  if(music.paused){
+    music.play();
+  }
+}, { once: true });
+
+document.body.addEventListener("click", () => {
+  const music = document.getElementById("music");
+  if(music.paused){
+    music.play();
+  }
+}, { once: true });
+
+/* crumble burn effect */
+
+function burn(){
+
+const img=document.getElementById("burnPic");
+
+const rect=img.getBoundingClientRect();
+
+const size=30;
+
+/* break image into pieces */
+
+for(let y=0;y<460;y+=size){
+for(let x=0;x<460;x+=size){
+
+let piece=document.createElement("div");
+
+piece.className="piece";
+
+piece.style.left=(rect.left+x)+"px";
+piece.style.top=(rect.top+y)+"px";
+
+piece.style.backgroundImage="url("+img.src+")";
+
+piece.style.backgroundPosition="-"+x+"px -"+y+"px";
+
+document.body.appendChild(piece);
+
+}
+
+}
+
+/* hide original image */
+
+img.style.visibility="hidden";
+
+/* ash particles */
+
+for(let i=0;i<60;i++){
+
+let ash=document.createElement("div");
+
+ash.className="ash";
+
+ash.style.left=(rect.left+Math.random()*460)+"px";
+ash.style.top=(rect.top+Math.random()*460)+"px";
+
+document.body.appendChild(ash);
+
+setTimeout(()=>ash.remove(),2500);
+
+}
+
+setTimeout(()=>go("s5"),2000);
+
+}
+
+
+/* floating hearts and flowers */
+
+setInterval(()=>{
+
+const icons=["💖","🌸","🌺","🌷","💗"];
+
+let item=document.createElement("div");
+item.className="float";
+
+item.innerHTML=icons[Math.floor(Math.random()*icons.length)];
+
+item.style.left=Math.random()*100+"vw";
+item.style.fontSize=(18+Math.random()*15)+"px";
+
+document.body.appendChild(item);
+
+setTimeout(()=>item.remove(),8000);
+
+},400);
+
+</script>
+
+</body>
+</html>
